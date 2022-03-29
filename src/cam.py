@@ -39,15 +39,25 @@ def squelet_track(ip="http://192.168.1.20:8080/video"):
     cv2.destroyAllWindows()
 
 
+def saveData(mat, c, qui):
+    f = open("data/"+qui+"/mesh"+str(c)+".dat", "w")
+    f.write(str(mat))
+    f.write("\n")
+    f.close()
+
+
 def face_track(ip="http://192.168.1.20:8080/video"):
     cap = cv2.VideoCapture(ip)
     detector = FaceMeshDetector(maxFaces=2)
     detector2 = FaceDetector()
+    cmpt = 0
     while True:
         success, img = cap.read()
         detector2.findFaces(img)
 
-        detector.findFaceMesh(img)
+        a, b = detector.findFaceMesh(img)
+        saveData(b, cmpt, "manu")
+        cmpt += 1
 
         cv2.imshow("Image", img)
         if cv2.waitKey(1) & 0xFF == ord('q'):
