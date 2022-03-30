@@ -11,7 +11,7 @@ print("lib imported")
 # Le modèle initial en comprenant les # est meilleur mais trop lent
 model = Sequential([
 
-    layers.Conv2D(128, 4, activation='relu'),
+    layers.Conv2D(128, 4, activation='relu', input_shape=(48, 78, 1)),
     layers.MaxPooling2D(),
     layers.Conv2D(64, 4, activation='relu'),
     layers.MaxPooling2D(),
@@ -22,6 +22,8 @@ model = Sequential([
     layers.Flatten(),
     layers.Dense(32, activation='relu'),
     layers.Dense(2, activation='softmax')
+
+
 ])
 
 print("model setuped")
@@ -34,9 +36,16 @@ print("model compiled")
 
 
 nombre_epochs = 20
+x_train = genDat()
+y_train = np.array(x_train[1])
+x_train = np.array(x_train[0])
+
+x_train = np.reshape(x_train, (-1, 48, 78, 1))
+print(x_train.shape)
 
 print('training...')
-training = model.fit(genDat(), epochs=nombre_epochs)
+training = model.fit(x_train, y_train, epochs=nombre_epochs,
+                     validation_split=0.1)
 
 
 train_acc = training.history['acc']

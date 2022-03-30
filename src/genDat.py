@@ -1,5 +1,9 @@
+from numpy import float64
+
+
 def genDat(nom=["manu", "augustin"], n=100):
     data = []
+    clss = []
     for r, nm in enumerate(nom):
         for i in range(n):
             data1 = []
@@ -21,8 +25,12 @@ def genDat(nom=["manu", "augustin"], n=100):
             for x in line:
                 for y in x:
                     if y not in ban and len(y) > 0:
-                        data1.append(int(y))
+                        data1.append(float64(y))
 
             f.close()
-            data.append([data1, r])
-    return(data)
+            if len(data1) == 3744:  # a changer, je veux tous le meme longuer
+
+                data.append(data1)
+                clss.append(r)
+
+    return([data, clss])
