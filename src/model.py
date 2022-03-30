@@ -33,7 +33,7 @@ model.compile(optimizer='adam',
 print("model compiled")
 
 
-nombre_epochs = 30
+nombre_epochs = 15
 x_train = genDat()
 y_train = np.array(x_train[1])
 x_train = np.array(x_train[0])
@@ -41,7 +41,6 @@ x_train = np.array(x_train[0])
 
 x_train = x_train.reshape(x_train.shape[0], 48, 78, 1)
 
-print(y_train)
 
 print('training...')
 training = model.fit(x_train, y_train, epochs=nombre_epochs,
@@ -49,5 +48,6 @@ training = model.fit(x_train, y_train, epochs=nombre_epochs,
 
 
 print("done")
-pred = model.predict(x_train)
+mn = genUsable("manu/mesh0.dat")
+pred = (model.predict(mn) > 0.5).astype("int32")
 print(pred)
