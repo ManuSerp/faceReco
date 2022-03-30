@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 from tensorflow.keras import *
 import numpy as np
 import cv2
+from genDat import *
 backend.backend()
 backend.image_data_format()
 # Le modèle initial en comprenant les # est meilleur mais trop lent
@@ -25,27 +26,9 @@ model.compile(optimizer='adam',
               loss="binary_crossentropy",
               metrics=['acc'],)
 
-
-batch_size = 20
-test_datagen = preprocessing.image.ImageDataGenerator(rescale=1./255)
-test_generator = test_datagen.flow_from_directory(
-    'test',
-    target_size=(224, 224),
-    batch_size=batch_size,)
-
-train_datagen = preprocessing.image.ImageDataGenerator(
-    rescale=1./255, shear_range=10, rotation_range=10, horizontal_flip=True, vertical_flip=True)
-# ajouter de l'aléatoire shear_range=30,rescale = 1./255,rotation_range=30, horizontal_flip=True, vertical_flip = True
-train_generator = train_datagen.flow_from_directory(
-    'train',
-    target_size=(224, 224),
-    batch_size=batch_size,)
-
-
 nombre_epochs = 20
 
-training = model.fit(
-    train_generator, validation_data=test_generator, epochs=nombre_epochs)
+training = model.fit(genDat(), epochs=nombre_epochs)
 
 
 train_acc = training.history['acc']
