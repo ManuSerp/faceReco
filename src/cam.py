@@ -56,7 +56,7 @@ def face_track(ip="http://192.168.1.20:8080/video"):
         detector2.findFaces(img)
 
         a, b = detector.findFaceMesh(img)
-        saveData(b, cmpt, "manu")
+        saveData(b, cmpt, "pierre")
         cmpt += 1
 
         cv2.imshow("Image", img)
