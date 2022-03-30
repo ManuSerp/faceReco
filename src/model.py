@@ -56,14 +56,16 @@ class idmodel():
 
 
 # code test
-x_train = genDat()
-y_train = np.array(x_train[1])
-x_train = np.array(x_train[0])
+if __name__ == '__main__':
 
-cnn = idmodel()
-#cnn.train(x_train, y_train)
-cnn.load()
+    x_train = genDat()
+    y_train = np.array(x_train[1])
+    x_train = np.array(x_train[0])
 
-mn = genUsable("manu/mesh0.dat")
-cnn.pred(mn)
-# cnn.save()
+    cnn = idmodel()
+    cnn.train(x_train, y_train)
+    # cnn.load()
+
+    mn = genUsable("manu/mesh0.dat")
+    cnn.pred(mn)
+    cnn.save()
