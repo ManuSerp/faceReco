@@ -43,6 +43,8 @@ class idmodel():
         print("done")
 
     def pred(self, dat):
+        if type(dat) is not np.ndarray:
+            return None
         pred = (self.model.predict(dat) > 0.5).astype("int32")
         return pred
 
@@ -63,7 +65,7 @@ if __name__ == '__main__':
     x_train = np.array(x_train[0])
 
     cnn = idmodel()
-    cnn.train(x_train, y_train, 20)
+    cnn.train(x_train, y_train, 15, 0.2)
     # cnn.load()
 
     mn = genUsable("../data/manu/mesh0.dat")
