@@ -14,7 +14,7 @@ def unison_shuffled_copies(dat, cl):
     return nd, nc
 
 
-def genDat(nom=["manu", "pierre"], n=160):
+def genDat(nom=["manu", "pierre"], n=600):
     data = []
     clss = []
     for r, nm in enumerate(nom):
@@ -54,7 +54,7 @@ def genDat(nom=["manu", "pierre"], n=160):
 def genUsable(file):
 
     data1 = []
-    f = open("../data/"+file, "r")
+    f = open(file, "r")
 
     line = f.readline()
     line = line.split("[")

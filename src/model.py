@@ -44,7 +44,7 @@ class idmodel():
 
     def pred(self, dat):
         pred = (self.model.predict(dat) > 0.5).astype("int32")
-        print(pred)
+        return pred
 
     def save(self):
         self.model.save_weights('../weights/wgt.h5')
@@ -63,9 +63,9 @@ if __name__ == '__main__':
     x_train = np.array(x_train[0])
 
     cnn = idmodel()
-    cnn.train(x_train, y_train)
+    cnn.train(x_train, y_train, 20)
     # cnn.load()
 
-    mn = genUsable("manu/mesh0.dat")
+    mn = genUsable("../data/manu/mesh0.dat")
     cnn.pred(mn)
     cnn.save()
