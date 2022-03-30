@@ -45,33 +45,6 @@ training = model.fit(x_train, y_train, epochs=nombre_epochs,
                      validation_split=0.1)
 
 
-train_acc = training.history['acc']
-
-xc = range(nombre_epochs)
-
-plt.figure()
-plt.plot(xc, train_acc, xc, training.history['val_acc'], 'red')
-plt.show()
-
-
-# img = preprocessing.image.load_img('voiture.jpg')
-
-# img = np.array(img) / 255.0
-
-# img = cv2.resize(img, dsize=(224, 224))
-# img = np.array(img).reshape(1, 224, 224, 3)
-# predictions = (model.predict(img) > 0.5).astype("int32")
-# print(predictions)
-
-# img = preprocessing.image.load_img('avion.jfif')
-
-# img = np.array(img) / 255.0
-
-# img = cv2.resize(img, dsize=(224, 224))
-# img = np.array(img).reshape(1, 224, 224, 3)
-# predictions = (model.predict(img) > 0.5).astype("int32")
-# print(predictions)
-
-# scores = model.evaluate(test_generator, verbose=0)
-
-# print("%s: %.2f%%" % (model.metrics_names[1], scores[1]*100))
+print("done")
+pred = model.predict(x_train)
+print(pred)
