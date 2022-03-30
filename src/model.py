@@ -21,7 +21,7 @@ model.add(layers.Conv2D(16, 2, activation='relu'))
 model.add(layers.MaxPooling2D())
 model.add(layers.Flatten())
 model.add(layers.Dense(32, activation='relu'))
-model.add(layers.Dense(1, activation='softmax'))
+model.add(layers.Dense(1, activation='sigmoid'))
 
 
 print(model.summary())
@@ -38,7 +38,10 @@ x_train = genDat()
 y_train = np.array(x_train[1])
 x_train = np.array(x_train[0])
 
+
 x_train = x_train.reshape(x_train.shape[0], 48, 78, 1)
+
+print(y_train)
 
 print('training...')
 training = model.fit(x_train, y_train, epochs=nombre_epochs,

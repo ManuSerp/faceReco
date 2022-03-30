@@ -1,4 +1,17 @@
-from numpy import float64
+from gettext import npgettext
+from numpy import float64, random
+
+
+def unison_shuffled_copies(dat, cl):
+    assert len(dat) == len(cl)
+    p = random.permutation(len(dat))
+    nd = []
+    nc = []
+    for x in p:
+        nd.append(dat[x])
+        nc.append(cl[x])
+
+    return nd, nc
 
 
 def genDat(nom=["manu", "augustin"], n=100):
@@ -33,4 +46,6 @@ def genDat(nom=["manu", "augustin"], n=100):
                 data.append(data1)
                 clss.append(r)
 
-    return([data, clss])
+    d, c = unison_shuffled_copies(data, clss)
+
+    return([d, c])
