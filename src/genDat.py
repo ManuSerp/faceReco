@@ -14,7 +14,7 @@ def unison_shuffled_copies(dat, cl):
     return nd, nc
 
 
-def genDat(nom=["manu", "augustin"], n=100):
+def genDat(nom=["manu", "pierre"], n=160):
     data = []
     clss = []
     for r, nm in enumerate(nom):
@@ -44,7 +44,7 @@ def genDat(nom=["manu", "augustin"], n=100):
             if len(data1) == 3744:  # a changer, je veux tous le meme longuer
 
                 data.append(data1)
-                clss.append(1-r)
+                clss.append(r)
 
     d, c = unison_shuffled_copies(data, clss)
 
