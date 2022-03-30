@@ -9,24 +9,18 @@ backend.image_data_format()
 
 print("lib imported")
 # Le modèle initial en comprenant les # est meilleur mais trop lent
-model = Sequential([
-
-    layers.Conv2D(128, 4, activation='relu', input_shape=(48, 78, 1)),
-    layers.MaxPooling2D(),
-    layers.Conv2D(64, 4, activation='relu'),
-    layers.MaxPooling2D(),
-    layers.Conv2D(32, 4, activation='relu'),
-    layers.MaxPooling2D(),
-    layers.Conv2D(16, 4, activation='relu'),
-    layers.MaxPooling2D(),
-    layers.Flatten(),
-    layers.Dense(32, activation='relu'),
-    layers.Dense(2, activation='softmax')
+model = Sequential()
+# layers.Flatten()
+model.add(layers.Conv2D(128, 2, activation='relu', input_shape=(4, 48, 78, 1)))
+# model.add(layers.MaxPooling2D())
+# model.add(layers.Conv2D(64, 2, activation='relu'))
+# model.add(layers.MaxPooling2D())
+model.add(layers.Flatten())
+model.add(layers.Dense(32, activation='relu'))
+model.add(layers.Dense(1, activation='softmax'))
 
 
-])
-
-print("model setuped")
+print(model.summary())
 
 model.compile(optimizer='adam',
               loss="binary_crossentropy",
@@ -40,7 +34,9 @@ x_train = genDat()
 y_train = np.array(x_train[1])
 x_train = np.array(x_train[0])
 
-x_train = np.reshape(x_train, (-1, 48, 78, 1))
+x_train = x_train.reshape(x_train.shape[0]//4, 4, 48, 78, 1)
+
+#x_train = np.reshape(x_train, (-1, 48, 78, 1))
 print(x_train.shape)
 
 print('training...')
